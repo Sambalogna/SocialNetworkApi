@@ -1,3 +1,4 @@
+const { Thought } = require('../models');
 const User = require('../models/User');
 
 module.exports = {
@@ -40,22 +41,28 @@ module.exports = {
     .catch((err)=> res.status(500).json(err))
   },
   //delete remove user
+  //Bonus
+  //remove thoughts associated to user when thought deleted
   deleteUser(req,res){
     User.findOneAndDelete({_id: req.params.userId})
     .then((user) => {
         if(!user){
           res.status(404).json({ message: 'No user with this id!' })
         }
-        console.log('User deleted')
+        //find all associated with a thought
+        //fix
+        Thought.findOneAndDelete(
+          {thoughts: req.params.thoughtId},
+          {$pull: {thoughts: req.params.thoughtId}},
+          {new: true}
+        )
     }
     )
+    .then((user => ))
   },
-  //Bonus
-  //remove thoughts associated to user when thought deleted
-
-
+  
   addFriend(req,res) {
-
+    User.findOneAndUpdate
   },
 
   removeFriend(req,res) {

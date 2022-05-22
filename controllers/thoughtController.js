@@ -17,13 +17,13 @@ module.exports = {
         )
         .catch((err) => res.status(500).json(err));
     },
-    // post create thought
+    // post create thought and 
     createThought(req, res) {
       Thought.create(req.body)
         .then((Thought) => {
           return User.findOneAndUpdate(
             { _id: req.body.userId },
-            { $addToSet: { Thoughts: Thought._id } },//insert unless already exists
+            { $addToSet: { thoughts: Thought._id } },//insert unless already exists
             { new: true }
           );
         })
@@ -55,6 +55,6 @@ module.exports = {
 
     //delete to pull and remove a reaction by the reaction's reactionId
     deleteReaction(req,res){
-      
+
     } 
 }
