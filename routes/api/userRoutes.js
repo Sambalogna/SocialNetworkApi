@@ -1,11 +1,14 @@
 const router = require('express').Router();
 //methods for posts and gets
-const {} = require('../../controllers/userController')
+const {
+    getUsers,
+    createUser
+} = require('../../controllers/userController')
 
 // /api/users
 //get all users
 //post create user
-router.route('/')
+router.route('/').get(getUsers).post(createUser);
 
 // /api/users/:userId
 //get single user
@@ -14,6 +17,9 @@ router.route('/')
 //Bonus
 //remove thoughts associated to user when thought deleted
 router.route('/:userId')
+
+
+router.route('/userId/friends/:friendId')
 
 
 module.exports = router;

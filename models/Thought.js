@@ -1,11 +1,12 @@
 const {Schema, model} = require('mongoose');
-const Reaction = require('./Reaction')
+const reactionSchema = require('./Reaction');
+
 
 //created at and virtuals
 
 const thoughtSchema = new Schema(
     {
-        thougthText: {
+        thoughtText: {
             type: String,
             required: true,
             minlength: 1,
@@ -13,12 +14,13 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             //date
+            type: Date,
+            default: Date.now,
             //set default to current timestamp
             //getter method to format timestamp on query
         },
         username: {
             type: String,
-            required: true,
         },
         reactions: [reactionSchema],
     },
