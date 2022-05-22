@@ -18,7 +18,7 @@ router.route('/')
 .get(getThoughts)
 .post(createThought)
 
-// /api/thought/:thoughtId
+// /api/thoughts/:thoughtId
 //get single thought
 //put update thought
 //delete thought

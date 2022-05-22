@@ -21,8 +21,10 @@ module.exports = {
   },
   // create a new user
   createUser(req, res) {
-    User.create(req.body)
-      .then((dbUserData) => res.json(dbUserData))
+    User.create(
+      {username: req.params.user},
+      {email: req.params.user})
+      .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
   //put update user
@@ -58,7 +60,7 @@ module.exports = {
         )
     }
     )
-    .then((user => ))
+    // .then((user => ))
   },
   
   addFriend(req,res) {
