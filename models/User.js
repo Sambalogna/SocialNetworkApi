@@ -1,5 +1,7 @@
-const {Schema, model} = require('mongoose')
+const {Schema, model} = require('mongoose');
+const Thought = require('./Thought');
 
+//todo: virtuals
 const userSchema = new Schema(
     {
         username:  {
@@ -15,17 +17,22 @@ const userSchema = new Schema(
             //Must match a valid email
         },
         //array of _id values referencing thought model
-        //is this right?
-        thoughts: [thoughtSchema],
-        friends: [friendSchema],
+        thoughts: [Thought],
+        //self referencing?
+        //is this right
+        friends: [User],
+        // ----
     },
     {
         toJSON: {
-            //what are getters
-            getters: true,
+            virtuals: true,
+        
         }
     }
 )
+
+//virtuals for friend count
+
 
 const User = model('user', userSchema);
 module.exports = User;
