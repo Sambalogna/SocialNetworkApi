@@ -41,8 +41,20 @@ module.exports = {
     },
     //good to go on these
     //put update thought
-    //delete thought
+    updateThought(req, res) {
 
+    },
+    //delete thought
+    deleteThought(req, res) {
+
+    },
     //post create reaction stored in a single thoughts reaction array field
-    //delete to pull and remove a reaction by the reaction's reactionId 
+    createReaction(req,res) {
+
+    },
+
+    //delete to pull and remove a reaction by the reaction's reactionId
+    deleteReaction(req,res){
+      
+    } 
 }

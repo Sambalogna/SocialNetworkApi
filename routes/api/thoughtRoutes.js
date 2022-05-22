@@ -1,6 +1,14 @@
 const router = require('express').Router();
 //methods for posts and gets
-const {} = require('../../controllers/thoughtController')
+const {
+    getThoughts,
+    getSingleThought,
+    createThought,
+    updateThought,
+    deleteThought,
+    createReaction,
+    deleteReaction,
+} = require('../../controllers/thoughtController')
 
 
 // /api/thoughts

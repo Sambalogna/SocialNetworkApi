@@ -49,9 +49,17 @@ module.exports = {
         console.log('User deleted')
     }
     )
-  }
+  },
   //Bonus
   //remove thoughts associated to user when thought deleted
-};
 
-addFriend()
+
+  addFriend(req,res) {
+
+  },
+
+  removeFriend(req,res) {
+
+  },
+
+}
