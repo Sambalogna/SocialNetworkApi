@@ -2,7 +2,10 @@ const router = require('express').Router();
 //methods for posts and gets
 const {
     getUsers,
-    createUser
+    createUser,
+    getSingleUser,
+    updateUser,
+    deleteUser,
 } = require('../../controllers/userController')
 
 // /api/users
@@ -16,9 +19,11 @@ router.route('/').get(getUsers).post(createUser);
 //delete remove user
 //Bonus
 //remove thoughts associated to user when thought deleted
-router.route('/:userId')
+router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser)
 
-
+//post add friend
+router.route('/userId/friends/')
+//delete remove a friend
 router.route('/userId/friends/:friendId')
 
 

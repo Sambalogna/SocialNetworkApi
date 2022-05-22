@@ -33,14 +33,25 @@ module.exports = {
     )
     .then((user) => {
       if(!user){
-        res.status(404).json({message: 'No video with this id!'})
+        res.status(404).json({message: 'No User with this id!'})
       }
       res.json(user)
     })
     .catch((err)=> res.status(500).json(err))
-  }
+  },
   //delete remove user
-  deleteUser()
+  deleteUser(req,res){
+    User.findOneAndDelete({_id: req.params.userId})
+    .then((user) => {
+        if(!user){
+          res.status(404).json({ message: 'No user with this id!' })
+        }
+        console.log('User deleted')
+    }
+    )
+  }
   //Bonus
   //remove thoughts associated to user when thought deleted
 };
+
+addFriend()
