@@ -50,7 +50,19 @@ module.exports = {
     },
     //post create reaction stored in a single thoughts reaction array field
     createReaction(req,res) {
-
+      Thought.findOneAndUpdate(
+        {_id: req.params.thoughtId},
+        {$addToSet: {reactions: req.body}},
+        {runValidators: true, new: true}
+      )
+      .select("-__v")
+      .then((thought)=> {
+        if(!thought){
+          res.status(404).json({message: 'no thought with this id'})
+        }
+        res.json(thought)
+      })
+      .catch((err)=> res.status(500).json({message: err.message}))
     },
 
     //delete to pull and remove a reaction by the reaction's reactionId

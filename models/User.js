@@ -14,20 +14,20 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
-        ]
+            //doesn't allow caps
+            match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, 'Use a valid email address']
             //Must match a valid email
         },
         //array of _id values referencing thought model
         thoughts: [{
             type: Schema.Types.ObjectId,
-            ref: 'Thought'
+            ref: 'thought'
         }],
         //self referencing?
         //is this right
         friends: [{
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'user'
         }],
         // ----
     },

@@ -5,8 +5,13 @@ module.exports = {
     //get all users
   getUsers(req, res) {
     User.find()
+      .populate({
+        path: "friends", 
+        select: "-__v"
+      })
+      .select("-__v")
       .then((users) => res.json(users))
-      .catch((err) => res.status(500).json(err));
+      //.catch((err) => res.status(500).json(err));
   },
   //find a user by id
   getSingleUser(req, res) {
@@ -21,9 +26,7 @@ module.exports = {
   },
   // create a new user
   createUser(req, res) {
-    User.create(
-      {username: req.params.user},
-      {email: req.params.user})
+    User.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
@@ -52,23 +55,46 @@ module.exports = {
           res.status(404).json({ message: 'No user with this id!' })
         }
         //find all associated with a thought
-        //fix
-        Thought.findOneAndDelete(
-          {thoughts: req.params.thoughtId},
-          {$pull: {thoughts: req.params.thoughtId}},
-          {new: true}
-        )
+        // fix
+        //  Thought.findOneAndDelete(
+        //    {thoughts: req.params.thoughtId},
+        //    {$pull: {thoughts: req.params.thoughtId}},
+        //    {new: true}
+        //  )
+        res.json(user)
     }
     )
     // .then((user => ))
   },
   
   addFriend(req,res) {
-    User.findOneAndUpdate
+    User.findOneAndUpdate(
+      {_id: req.params.userId},
+      {$addToSet:{friends: req.params.friendId}},
+      {runValidator: true, new:true},
+    )
+    .then((user) => {
+      if(!user) {
+        res.status(404).json({message: 'No user with that Id'})
+      }
+      res.json(user)
+    })
+    .catch((err)=> res.status(500).json(err))
   },
 
   removeFriend(req,res) {
-
+    User.findOneAndUpdate(
+      {_id: req.params.userId},
+      {$pull:{friends: req.params.friendId}},
+      {runValidator: true, new:true},
+    )
+    .then((user)=> {
+      if(!user){
+        res.status(404).json({message: 'No user with that Id'})
+      }
+      res.json(user)
+    })
+    .catch((err) => res.status(500).json({message: err.message}))
   },
 
 }
