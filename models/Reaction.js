@@ -1,7 +1,5 @@
 const {Schema, Types} = require('mongoose');
 
-//todo created at
-
 const reactionSchema = new Schema(
     {
         reactionId: {

@@ -33,6 +33,6 @@ router.route('/:thoughtId/reactions')
 .post(createReaction)
 
 //delete to pull and remove a reaction by the reaction's reactionId 
-router.route('/:thoughtId/reactions/reactionId')
+router.route('/:thoughtId/reactions/:reactionId')
 .delete(deleteReaction)
 module.exports = router;
